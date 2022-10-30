@@ -1,4 +1,4 @@
-import { Listener, OrderCancelledEvent, Subjects } from '@cygnetops/common';
+import { Listener, OrderCancelledEvent, Subjects } from '../../utils';
 import { Message } from 'node-nats-streaming';
 import { queueGroupName } from './queue-group-name';
 import { Ticket } from '../../models/ticket';
@@ -20,7 +20,6 @@ export class OrderCancelledListener extends Listener<OrderCancelledEvent> {
     await new TicketUpdatedPublisher(this.client).publish({
       id: ticket.id,
       orderId: ticket.orderId,
-      userId: ticket.userId,
       price: ticket.price,
       title: ticket.title,
       version: ticket.version,

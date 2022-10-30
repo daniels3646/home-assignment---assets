@@ -6,7 +6,7 @@ import {
   requireAuth,
   NotAuthorizedError,
   BadRequestError,
-} from '@cygnetops/common';
+} from '../utils';
 import { Ticket } from '../models/ticket';
 import { TicketUpdatedPublisher } from '../events/publishers/ticket-updated-publisher';
 import { natsWrapper } from '../nats-wrapper';
@@ -15,7 +15,6 @@ const router = express.Router();
 
 router.put(
   '/api/tickets/:id',
-  requireAuth,
   [
     body('title').not().isEmpty().withMessage('Title is required'),
     body('price')
@@ -34,10 +33,6 @@ router.put(
       throw new BadRequestError('Cannot edit a reserved ticket');
     }
 
-    if (ticket.userId !== req.currentUser!.id) {
-      throw new NotAuthorizedError();
-    }
-
     ticket.set({
       title: req.body.title,
       price: req.body.price,
@@ -47,7 +42,6 @@ router.put(
       id: ticket.id,
       title: ticket.title,
       price: ticket.price,
-      userId: ticket.userId,
       version: ticket.version,
     });
 

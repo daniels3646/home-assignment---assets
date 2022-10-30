@@ -1,5 +1,5 @@
 import { Message } from 'node-nats-streaming';
-import { Listener, OrderCreatedEvent, Subjects } from '@cygnetops/common';
+import { Listener, OrderCreatedEvent, Subjects } from '../../utils';
 import { queueGroupName } from './queue-group-name';
 import { Ticket } from '../../models/ticket';
 import { TicketUpdatedPublisher } from '../publishers/ticket-updated-publisher';
@@ -26,7 +26,6 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
       id: ticket.id,
       price: ticket.price,
       title: ticket.title,
-      userId: ticket.userId,
       orderId: ticket.orderId,
       version: ticket.version,
     });
