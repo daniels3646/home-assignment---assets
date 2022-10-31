@@ -5,3 +5,14 @@ table {
 th.mat-sort-header-sorted {
     color: black;
 }
+
+.outer {
+
+    display: block;
+    margin-left:1%;
+    margin-top:1%;
+}
+mat-card-actions {
+    display: flex;
+    justify-content: space-between;
+}

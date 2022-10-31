@@ -41,7 +41,7 @@
         </a>
         <a mat-list-item [routerLink]="['/scans']" routerLinkActive="active">
           <mat-icon mat-list-icon>
-            ping
+            schedule
           </mat-icon>
           <p mat-line> Scans </p>
         </a>
@@ -54,11 +54,11 @@
     <!-- Main content -->
     <mat-sidenav-content class="sidenav-content">
 
-      <div class="progress-bar-container">
+      <!--<div class="progress-bar-container">
         <mat-progress-bar color="accent" mode="indeterminate" *ngIf="spinnerService.visibility | async">
         </mat-progress-bar>
-        <!-- <mat-spinner class="spinner" [diameter]="50" *ngIf="showSpinner"></mat-spinner> -->
-      </div>
+        <mat-spinner class="spinner" [diameter]="50" *ngIf="showSpinner"></mat-spinner>
+      </div>-->
 
 
       <router-outlet></router-outlet>

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from 'src/app/shared/layout/layout.component';
 
 import { AssetListComponent } from './asset-list/asset-list.component';
+import { EditAssetComponent } from './edit-asset/edit-asset.component';
 
 const routes: Routes = [
   {
@@ -10,6 +11,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', component: AssetListComponent },
+      { path: 'asset/:id', component: EditAssetComponent },
     ]
   }
 ];

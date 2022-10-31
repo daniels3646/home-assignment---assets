@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
 import { NGXLogger } from 'ngx-logger';
-import { NotificationService } from 'src/app/core/services/notification.service';
 import { ScansService } from 'src/app/core/services/scans.service';
 
 @Component({
@@ -12,14 +11,20 @@ import { ScansService } from 'src/app/core/services/scans.service';
 })
 export class ScanListComponent implements OnInit {
 
+
   constructor(
     private logger: NGXLogger,
-    private notificationService: NotificationService,
     private titleService: Title,
-    private scansService: ScansService
+    public scansService: ScansService
   ) { }
 
+  @ViewChild(MatSort, { static: true })
+  sort: MatSort = new MatSort;
+
+  displayedColumns: string[] = ['status', 'startsAt', 'name', 'ip'];
+
   ngOnInit() {
+    this.scansService.getscans_init.subscribe();
     this.titleService.setTitle('home assignment - Scans');
     this.logger.log('Scans loaded');
   }
