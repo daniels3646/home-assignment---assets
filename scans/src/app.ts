@@ -3,19 +3,14 @@ import 'express-async-errors';
 import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
 import { errorHandler, NotFoundError } from './utils';
-import { createAssetRouter } from './routes/new';
-import { showAssetRouter } from './routes/show';
-import { indexAssetRouter } from './routes/index';
-import { updateAssetRouter } from './routes/update';
+
+import { deleteScanRouter } from './routes/delete';
+import { indexScanRouter } from './routes/index';
+import { newScanRouter } from './routes/new';
+import { showScanRouter } from './routes/show';
 
 const app = express();
-
 app.set('trust proxy', true);
-
-
-
-
-
 app.use(json());
 app.use(
   cookieSession({
@@ -24,10 +19,10 @@ app.use(
   })
 );
 
-app.use(createAssetRouter);
-app.use(showAssetRouter);
-app.use(indexAssetRouter);
-app.use(updateAssetRouter);
+app.use(deleteScanRouter);
+app.use(indexScanRouter);
+app.use(newScanRouter);
+app.use(showScanRouter);
 
 app.all('*', async (req, res) => {
   throw new NotFoundError();

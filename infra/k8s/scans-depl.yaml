@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scans-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scans
+  template:
+    metadata:
+      labels:
+        app: scans
+    spec:
+      containers:
+        - name: scans
+          image: cygnetops/scans
+          env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: ticketing
+            - name: REDIS_HOST
+              value: scans-redis-srv
+            - name: MONGO_URI
+              value: 'mongodb://scans-mongo-srv:27017/scans'
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: scans-srv
+spec:
+  selector:
+    app: scans
+  ports:
+    - name: scans
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

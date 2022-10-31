@@ -3,8 +3,6 @@ import { body } from 'express-validator';
 import {
   validateRequest,
   NotFoundError,
-  requireAuth,
-  NotAuthorizedError,
   BadRequestError,
 } from '../utils';
 import { Asset } from '../models/asset';
@@ -29,10 +27,6 @@ router.put(
       throw new NotFoundError();
     }
 
-    if (asset.orderId) {
-      throw new BadRequestError('Cannot edit a reserved asset');
-    }
-
     asset.set({
       title: req.body.title,
       price: req.body.price,
@@ -40,8 +34,10 @@ router.put(
     await asset.save();
     new AssetUpdatedPublisher(natsWrapper.client).publish({
       id: asset.id,
-      title: asset.title,
-      price: asset.price,
+      ip: asset.ip,
+      name: asset.name,
+      dateCreated: asset.dateCreated,
+      description: asset.description,
       version: asset.version,
     });
 

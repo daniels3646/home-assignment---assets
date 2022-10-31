@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scans-redis-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scans-redis
+  template:
+    metadata:
+      labels:
+        app: scans-redis
+    spec:
+      containers:
+        - name: scans-redis
+          image: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: scans-redis-srv
+spec:
+  selector:
+    app: scans-redis
+  ports:
+    - name: db
+      protocol: TCP
+      port: 6379
+      targetPort: 6379

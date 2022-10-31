@@ -8,20 +8,6 @@ spec:
     - host: ticketing.dev
       http:
         paths:
-          - path: /api/users
-            pathType: Prefix
-            backend:
-              service:
-                name: auth-srv
-                port: 
-                  number: 3000
-          - path: /api/tickets
-            pathType: Prefix
-            backend:
-              service:
-                name: tickets-srv
-                port: 
-                  number: 3000
           - path: /api/assets
             pathType: Prefix
             backend:
@@ -29,11 +15,11 @@ spec:
                 name: assets-srv
                 port: 
                   number: 3000
-          - path: /api/orders
+          - path: /api/scans
             pathType: Prefix
             backend:
               service:
-                name: orders-srv
+                name: scans-srv
                 port: 
                   number: 3000
           - path: /
@@ -43,3 +29,24 @@ spec:
                 name: client-srv
                 port: 
                   number: 3000
+                    #          - path: /api/users
+                    #            pathType: Prefix
+                    #            backend:
+                    #              service:
+                    #                name: auth-srv
+                    #                port: 
+                    #                  number: 3000
+                    #          - path: /api/tickets
+                    #            pathType: Prefix
+                    #            backend:
+                    #              service:
+                    #                name: tickets-srv
+                    #                port: 
+                    #                  number: 3000
+                    #          - path: /api/orders
+                    #            pathType: Prefix
+                    #            backend:
+                    #              service:
+                    #                name: orders-srv
+                    #                port: 
+                    #                  number: 3000

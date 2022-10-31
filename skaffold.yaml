@@ -8,14 +8,6 @@ build:
   local:
     push: false
   artifacts:
-    - image: cygnetops/auth
-      context: auth
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: 'src/**/*.ts'
-            dest: .
     - image: cygnetops/ticketing-client
       context: client
       docker:
@@ -23,14 +15,6 @@ build:
       sync:
         manual:
           - src: '**/*.js'
-            dest: .
-    - image: cygnetops/tickets
-      context: tickets
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: 'src/**/*.ts'
             dest: .
     - image: cygnetops/assets
       context: assets
@@ -40,19 +24,35 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: cygnetops/orders
-      context: orders
+    - image: cygnetops/scans
+      context: scans
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: cygnetops/expiration
-      context: expiration
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: 'src/**/*.ts'
-            dest: .
+#    - image: cygnetops/tickets
+#      context: tickets
+#      docker:
+#        dockerfile: Dockerfile
+#      sync:
+#        manual:
+#          - src: 'src/**/*.ts'
+#            dest: .
+#    - image: cygnetops/orders
+#      context: orders
+#      docker:
+#        dockerfile: Dockerfile
+#      sync:
+#        manual:
+#          - src: 'src/**/*.ts'
+#            dest: .
+#    - image: cygnetops/auth
+#      context: auth
+#      docker:
+#        dockerfile: Dockerfile
+#      sync:
+#        manual:
+#          - src: 'src/**/*.ts'
+#            dest: .

@@ -2,10 +2,11 @@ import mongoose from 'mongoose';
 import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 
 interface AssetAttrs {
+  id: string;
   ip: string;
   name: string;
-  description: string;
   dateCreated: Date;
+  description: string;
 }
 
 export interface AssetDoc extends mongoose.Document {
@@ -13,12 +14,15 @@ export interface AssetDoc extends mongoose.Document {
   name: string;
   description: string;
   dateCreated: Date;
-  lastScanned: Date;
   version: number;
 }
 
 interface AssetModel extends mongoose.Model<AssetDoc> {
   build(attrs: AssetAttrs): AssetDoc;
+  findByEvent(event: {
+    id: string;
+    version: number;
+  }): Promise<AssetDoc | null>;
 }
 
 const assetSchema = new mongoose.Schema(
@@ -35,11 +39,6 @@ const assetSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    lastScanned: {
-      type: Date,
-      required: false,
-      default: null
-    },
     dateCreated: {
       type: Date,
     },
@@ -53,12 +52,24 @@ const assetSchema = new mongoose.Schema(
     },
   }
 );
-
 assetSchema.set('versionKey', 'version');
 assetSchema.plugin(updateIfCurrentPlugin);
 
+assetSchema.statics.findByEvent = (event: { id: string; version: number }) => {
+  return Asset.findOne({
+    _id: event.id,
+    version: event.version - 1,
+  });
+};
+
 assetSchema.statics.build = (attrs: AssetAttrs) => {
-  return new Asset(attrs); 
+  return new Asset({
+    _id: attrs.id,
+    ip: attrs.ip,
+    name: attrs.name,
+    description: attrs.description,
+    dateCreated: attrs.dateCreated,
+  });
 };
 
 const Asset = mongoose.model<AssetDoc, AssetModel>('Asset', assetSchema);

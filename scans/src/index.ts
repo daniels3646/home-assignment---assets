@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
-import { app } from './app';
-import { AssetLastScanUpdatedListener } from './events/listeners/asset_last_scan-updated-listener';
 import { natsWrapper } from './nats-wrapper';
+import { AssetCreatedListener } from './events/listeners/asset-created-listener';
+import { AssetUpdatedListener } from './events/listeners/asset-updated-listener';
+import { app } from './app';
 
 const start = async () => {
-
   if (!process.env.JWT_KEY) {
     throw new Error('JWT_KEY must be defined');
   }
@@ -34,14 +34,15 @@ const start = async () => {
     process.on('SIGINT', () => natsWrapper.client.close());
     process.on('SIGTERM', () => natsWrapper.client.close());
 
-    new AssetLastScanUpdatedListener(natsWrapper.client).listen();
+    new AssetCreatedListener(natsWrapper.client).listen();
+    new AssetUpdatedListener(natsWrapper.client).listen();
 
     await mongoose.connect(process.env.MONGO_URI);
     console.log('Connected to MongoDb');
+
   } catch (err) {
     console.error(err);
   }
-
   app.listen(3000, () => {
     console.log('Listening on port 3000!!!!!!!!');
   });
