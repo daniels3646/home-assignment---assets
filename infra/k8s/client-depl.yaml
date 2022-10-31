@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: client
-          image: daniels3646/ticketing-client
+          image: daniels3646/angular-client
 ---
 apiVersion: v1
 kind: Service

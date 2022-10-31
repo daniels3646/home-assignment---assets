@@ -8,7 +8,7 @@ build:
   local:
     push: false
   artifacts:
-    - image: daniels3646/ticketing-client
+    - image: daniels3646/angular-client
       context: client
       docker:
         dockerfile: Dockerfile
