@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: client
-          image: cygnetops/ticketing-client
+          image: daniels3646/ticketing-client
 ---
 apiVersion: v1
 kind: Service

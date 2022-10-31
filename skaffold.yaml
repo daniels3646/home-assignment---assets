@@ -8,7 +8,7 @@ build:
   local:
     push: false
   artifacts:
-    - image: cygnetops/ticketing-client
+    - image: daniels3646/ticketing-client
       context: client
       docker:
         dockerfile: Dockerfile
@@ -16,7 +16,7 @@ build:
         manual:
           - src: '**/*.js'
             dest: .
-    - image: cygnetops/assets
+    - image: daniels3646/assets
       context: assets
       docker:
         dockerfile: Dockerfile
@@ -24,7 +24,7 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-    - image: cygnetops/scans
+    - image: daniels3646/scans
       context: scans
       docker:
         dockerfile: Dockerfile
@@ -32,27 +32,3 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
-#    - image: cygnetops/tickets
-#      context: tickets
-#      docker:
-#        dockerfile: Dockerfile
-#      sync:
-#        manual:
-#          - src: 'src/**/*.ts'
-#            dest: .
-#    - image: cygnetops/orders
-#      context: orders
-#      docker:
-#        dockerfile: Dockerfile
-#      sync:
-#        manual:
-#          - src: 'src/**/*.ts'
-#            dest: .
-#    - image: cygnetops/auth
-#      context: auth
-#      docker:
-#        dockerfile: Dockerfile
-#      sync:
-#        manual:
-#          - src: 'src/**/*.ts'
-#            dest: .

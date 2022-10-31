@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: scans
-          image: cygnetops/scans
+          image: daniels3646/scans
           env:
             - name: NATS_CLIENT_ID
               valueFrom:
@@ -23,7 +23,7 @@ spec:
             - name: NATS_URL
               value: 'http://nats-srv:4222'
             - name: NATS_CLUSTER_ID
-              value: ticketing
+              value: assets
             - name: REDIS_HOST
               value: scans-redis-srv
             - name: MONGO_URI
