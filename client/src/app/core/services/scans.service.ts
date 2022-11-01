@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject , Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
+
+export interface scan{status :string,startsAt:string,asset:{ ip: string,name:string,description:string,dateCreated:string}}
 
 @Injectable({
     providedIn: 'root'
@@ -14,8 +16,8 @@ export class ScansService {
 
     constructor(private http: HttpClient) { }
 
-    public getAssets(message: string) {
-        return this.http.get("api/scans/")
+    public getscans(assetId: string) : Observable<scan[]>{
+        return this.http.get<scan[]>("api/scans/assetId/"+assetId)
     }
 }
 

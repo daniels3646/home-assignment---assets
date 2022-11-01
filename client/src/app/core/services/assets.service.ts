@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject , Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 
 @Injectable({
@@ -14,8 +14,8 @@ export class AssetsService {
 
     constructor(private http: HttpClient) { }
 
-    public getAssets() {
-        return this.http.get("api/assets/")
+    public getAsset(assetId : string) {
+        return this.http.get<{ip :string,name:string,description:string,lastScanned:string,dateCreated:string}>("api/assets/"+assetId)
     }
 }
 

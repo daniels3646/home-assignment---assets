@@ -23,7 +23,7 @@
         <mat-card-actions>
           <button mat-button [routerLink]="['/assets/asset/'+obj.id]">asset page</button>
           <div *ngIf="obj.lastScanned">
-            last updated 
+            <b>last updated</b> 
             <br>
             {{obj.lastScanned | date: 'short'}}
           </div>

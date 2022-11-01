@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ScansService , scan} from 'src/app/core/services/scans.service';
+import {Subject } from 'rxjs';
+import {tap} from 'rxjs/operators';
+ import {MatDialogModule} from '@angular/material/dialog'; 
 
 @Component({
   selector: 'app-edit-asset',
@@ -8,13 +12,15 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class EditAssetComponent implements OnInit {
 
+  scans$ = new Subject<scan[]>();
   id: number | undefined;
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    public route: ActivatedRoute,
+    public scansService: ScansService
+    ) { }
 
   ngOnInit(): void {
-  this.route.queryParams.subscribe(params => {
-    this.id = params['id'];
-  });
+    this.scansService.getscans(this.route.snapshot.params['id']).pipe(tap((val : scan[]) => {this.scans$.next(val)})).subscribe();
   }
 
 }
