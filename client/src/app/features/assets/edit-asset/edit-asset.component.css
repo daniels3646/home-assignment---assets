@@ -1,3 +1,31 @@
 .card{
     max-width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+.flex{
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    height: 60%;
+    margin-top: 10%;
+}
+
+#header{
+    margin-top: -22px !important;
+    display:block !important;
+
+}
+#content{
+    margin-top: 16px;
+    margin-left:16px;
+}
+mat-card-actions{
+    margin-top: auto;
+}
+.mat-card-subtitle, #content{
+    font-size: 18px;
+}
+#actions{
+    display: flex;
 }

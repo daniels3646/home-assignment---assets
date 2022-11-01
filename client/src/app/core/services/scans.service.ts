@@ -19,5 +19,9 @@ export class ScansService {
     public getscans(assetId: string) : Observable<scan[]>{
         return this.http.get<scan[]>("api/scans/assetId/"+assetId)
     }
+    public postscan(assetId: string,startsAt: string) {
+        return this.http.post("api/scans/",{assetId,startsAt})
+    }
+
 }
 
