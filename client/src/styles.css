@@ -146,3 +146,7 @@ p .mat-icon {
     opacity: 1;
   }
 }
+
+.mat-drawer-content{
+  overflow: none !important;
+}

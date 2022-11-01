@@ -17,5 +17,8 @@ export class AssetsService {
     public getAsset(assetId : string) {
         return this.http.get<{ip :string,name:string,description:string,lastScanned:string,dateCreated:string}>("api/assets/"+assetId)
     }
+    public createAsset(ip:string,name:string,description:string) {
+        return this.http.post("api/assets/",{ip,name,description})
+    }
 }
 

@@ -29,3 +29,6 @@ mat-card-actions{
 #actions{
     display: flex;
 }
+.mat-drawer-content{
+    overflow: none !important;
+}

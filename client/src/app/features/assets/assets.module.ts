@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AssetsRoutingModule } from './assets-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { AssetListComponent } from './asset-list/asset-list.component';
+import { AssetListComponent, CreateAssetDialog } from './asset-list/asset-list.component';
 import { EditAssetComponent } from './edit-asset/edit-asset.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
@@ -13,6 +13,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+ import {MatFormFieldModule} from '@angular/material/form-field'; 
 
 @NgModule({
     imports: [
@@ -29,12 +30,15 @@ import { MatSelectModule } from '@angular/material/select';
       NgxMatMomentModule,
       MatRadioModule,
       MatSelectModule,
-      MatCheckboxModule
-
+      MatCheckboxModule,
+    MatFormFieldModule,
     ],
     declarations: [
         AssetListComponent,
         EditAssetComponent,
-    ]
+        CreateAssetDialog
+    ],
+    entryComponents: [CreateAssetDialog],
+
 })
 export class AssetsModule { }

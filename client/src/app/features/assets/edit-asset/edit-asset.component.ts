@@ -36,7 +36,9 @@ export class EditAssetComponent implements OnInit {
   addScan(){
     let chosenDateTime = this.formGroup.get('date')?.value?.toISOString();
     if(chosenDateTime){
-      this.scansService.postscan(this.route.snapshot.params['id'],chosenDateTime).subscribe();
+      this.scansService.postscan(this.route.snapshot.params['id'],chosenDateTime).subscribe(_=>{
+        this.scansService.getscans(this.route.snapshot.params['id']).pipe(tap((val : scan[]) => {this.scans$.next(val)})).subscribe();
+      });
       this.formGroup.get('date')?.setValue(null);
     }else{
       console.log("choose a time")
